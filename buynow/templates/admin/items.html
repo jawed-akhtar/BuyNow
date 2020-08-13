@@ -1,0 +1,43 @@
+{% extends 'admin/admin_home.html' %}
+
+{% block content %}
+    <div>
+        <ul class="nav justify-content-center m-2">
+            <li class="nav-item bg-info">
+                <a href="{{ url_for('item.add_item') }}" class="text-white nav-link">Add New Item</a>
+            </li>
+        </ul>
+    </div>
+    <div class="table-responsive-md">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Update</th>
+                    <th>Delete</th>
+                    <th>Id</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Item Image</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <th><a href="{{ url_for('item.update_item', item_id=item.id) }}"><i class="far fa-edit"></i></a></th>
+                        <th>
+                            <form method="POST" action="{{ url_for('item.delete_item', item_id=item.id) }}">
+                                <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                            </form>
+                        </th>
+                        <th>{{ item.id }}</th>
+                        <th>{{ item.category }}</th>
+                        <th>{{ item.description }}</th>
+                        <th>{{ item.item_image }}</th>
+                        <th>{{ item.price }}</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    {% for item in items %}
+        <div class="card col-md-5 col-lg-3 mx-auto">
+            <img class="card-img-top" src="{{ url_for('static', filename='product_image/'+item.item_image) }}" alt="product image" />
+            <div class="card-body p-0">
+                <h5 class="card-title">{{ item.category }}</h5>
+                <p class="card-text">
+                    {{ item.description }} <br>
+                    Price: Rs.{{ item.price }}
+                </p>
+                {% if not current_user.admin %}
+                <div>
+                    <form method="POST" action="{{ url_for('cart.add_to_cart', item_id=item.id) }}">
+                        {{ cartForm.hidden_tag() }}
+                        <div class="form-group row">
+                            {{ cartForm.quantity.label(class="form-control-label small col-12") }}
+                            <div class=col-6>
+                                {{ cartForm.quantity(class="form-control") }}
+                            </div>
+                            <div class=col-6>
+                                {{ cartForm.submit(class="btn btn-primary btn-block") }}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <form method="POST" action="{{ url_for('order.place_order', item_id=item.id) }}">
+                        {{ cartForm.hidden_tag() }}
+                        <div class="form-group row">
+                            {{ orderForm.quantity.label(class="form-control-label small col-12") }}
+                            <div class="col-6">
+                                {{ orderForm.quantity(class="form-control") }}
+                            </div>
+                            <div class="col-6">
+                            {{ orderForm.submit(class="btn btn-primary btn-block") }}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

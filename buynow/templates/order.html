@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div>
+        {% for order in orderList %}
+            <div class="media bg-white cart-media p-2 m-3 order">
+                    <div class="media-body">
+                        <p>Order ID: {{ order.id }}</br>
+                        Amount: {{ order.order_amount }}</br>
+                        Order Date: {{order.order_date.strftime('%d-%m-%Y') }}</br>
+                        Shipment Date: {{ shipments[order].strftime('%d-%m-%Y') }}</br>
+                        Shipping Address: {{ current_user.city }}</p>
+                        <p class="text-center text-info">Order Items</p>
+                        <div class="row mx-auto">
+                            {% for item in orderList[order] %}
+                                <div class="media cart-media p-2 my-2 mx-auto col-lg-5">
+                                    <div>
+                                        <img src="{{ url_for('static', filename='product_image/'+item[0].item_image) }}" />
+                                    </div>
+                                    <div class="media-body ml-5 my-auto">
+                                        <p>{{ item[0].category }}</p>
+                                        <p class="small">{{ item[0].description }}</p>
+                                        <p>Price - {{ item[0].price }}</p>
+                                        <p>Quantity: {{ item[1] }}</p> 
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+{% endblock %}

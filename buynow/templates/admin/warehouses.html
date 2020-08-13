@@ -1,0 +1,37 @@
+{% extends 'admin/admin_home.html' %}
+
+{% block content %}
+    <div>
+        <ul class="nav justify-content-center m-2">
+            <li class="nav-item bg-info">
+                <a href="{{ url_for('warehouse.add_warehouse') }}" class="text-white nav-link">Add New Warehouse</a>
+            </li>
+        </ul>
+    </div>
+    <div class="table-responsive-md">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Update</th>
+                    <th>Delete</th>
+                    <th>Id</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for warehouse in warehouses %}
+                    <tr>
+                        <th><a href="{{ url_for('warehouse.update_warehouse', warehouse_id=warehouse.id) }}"><i class="far fa-edit"></i></a></th>
+                        <th>
+                            <form method="POST" action="{{ url_for('warehouse.delete_warehouse', warehouse_id=warehouse.id) }}">
+                                <button class="btn btn-danger" type="submit"><i class="far fa-trash-alt"></i></button>
+                            </form>
+                        </th>
+                        <th>{{ warehouse.id }}</th>
+                        <th>{{ warehouse.city }}</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div>
+        <ul class="nav justify-content-center m-2">
+            <li class="nav-item bg-info">
+                <a href="{{ url_for('cart.buy_cart_all') }}" class="text-white nav-link">Buy</a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        {% for item in cartitems %}
+            <div class="media bg-white cart-media p-2 m-3">
+                <div>
+                    <img class="img-thumbnail" src="{{ url_for('static', filename='product_image/'+item.item_image) }}" />
+                </div>
+                <div class="media-body ml-5 my-auto">
+                    <p>{{ item.category }}</p>
+                    <p class="small">{{ item.description }}</p>
+                    <p>Total - Rs.{{ item.price * cartitems[item] }}</p>
+                    <form method="POST" action="{{ url_for('cart.remove_cart_item', item_id=item.id) }}">
+                        <button class="btn btn-danger">Remove</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

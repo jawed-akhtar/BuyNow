@@ -1,0 +1,46 @@
+body {
+    background-color: #eeecec;
+    color: #333333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+}
+
+.login-card , .register-card,
+ .reset-request-card, .reset-pass-card,
+ .new-item-card, .update-item-card,
+ .new-warehouse-card, .update-warehouse-card {
+    width:70%;
+    margin:auto;
+    background-color: #fafafa;
+}
+
+.account-update-card, .order {
+    background-color: #fafafa;
+}
+
+.login-button , .register-button,
+ .reset-request-button, .reset-pass-button,
+ .new-item-button, .update-item-button,
+ .new-warehouse-button, .update-warehouse-button {
+    width:20%;
+    margin:auto;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.cart-media {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media screen and (max-width: 780px) {
+    .login-button , .register-button, .reset-request-button, .reset-pass-button,
+    .new-item-button, .update-item-button, .new-warehouse-button,
+    .update-warehouse-button{
+        width:50%;
+        margin:auto;
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+}
